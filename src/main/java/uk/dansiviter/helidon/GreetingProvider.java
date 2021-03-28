@@ -1,17 +1,20 @@
 package uk.dansiviter.helidon;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.opentracing.Traced;
 
 /**
  * Provider for greeting message.
  */
 @ApplicationScoped
 public class GreetingProvider {
+	private static final Logger LOG = Logger.getLogger(GreetingProvider.class.getName());
 	private final AtomicReference<String> message = new AtomicReference<>();
 
 	/**
@@ -24,11 +27,15 @@ public class GreetingProvider {
 		this.message.set(message);
 	}
 
+	@Traced
 	String getMessage() {
+		LOG.info("Getting message...");
 		return message.get();
 	}
 
+	@Traced
 	void setMessage(String message) {
+		LOG.info("Setting message...");
 		this.message.set(message);
 	}
 }
