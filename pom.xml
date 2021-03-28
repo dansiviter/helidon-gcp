@@ -95,6 +95,26 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>uk.dansiviter.gcp</groupId>
+			<version>0.1.0-SNAPSHOT</version>
+			<artifactId>microprofile-metrics</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-context</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 
 		<!-- Test Dependencies -->
 
