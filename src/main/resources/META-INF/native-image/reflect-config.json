@@ -1,1 +1,7 @@
-[]
+[
+	{
+		"name": "uk.dansiviter.helidon.ServiceContextDecorator",
+    "allDeclaredConstructors": true,
+    "allPublicMethods": true
+	}
+]
