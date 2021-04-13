@@ -1,4 +1,4 @@
-package uk.dansiviter.helidon;
+package uk.dansiviter.helidon.rest;
 
 import java.util.Collections;
 
@@ -23,6 +23,8 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
+import uk.dansiviter.helidon.GreetingProvider;
+
 /**
  * A simple JAX-RS resource to greet you. Examples:
  *
@@ -35,8 +37,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
  *
  * The message is returned as a JSON object.
  */
-@Path("/greet")
+@Path("v1/greet")
 @RequestScoped
+@Produces(MediaType.APPLICATION_JSON)
 public class GreetResource {
 
 	private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
@@ -64,7 +67,6 @@ public class GreetResource {
 	 */
 	@SuppressWarnings("checkstyle:designforextension")
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public JsonObject getDefaultMessage() {
 		return createResponse("World");
 	}
@@ -78,7 +80,6 @@ public class GreetResource {
 	@SuppressWarnings("checkstyle:designforextension")
 	@Path("/{name}")
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public JsonObject getMessage(@PathParam("name") String name) {
 		return createResponse(name);
 	}

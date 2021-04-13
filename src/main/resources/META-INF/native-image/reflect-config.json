@@ -3,5 +3,10 @@
 		"name": "uk.dansiviter.helidon.ServiceContextDecorator",
     "allDeclaredConstructors": true,
     "allPublicMethods": true
+	},
+	{
+		"name": "uk.dansiviter.helidon.model.Post",
+    "allDeclaredConstructors": true,
+    "allPublicMethods": true
 	}
 ]
