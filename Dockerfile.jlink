@@ -1,6 +1,6 @@
 
 # 1st stage, build the app
-FROM openjdk:16-jdk-alpine as build
+FROM adoptopenjdk/openjdk16:alpine as build
 RUN apk add --no-cache bash maven
 
 WORKDIR /helidon
