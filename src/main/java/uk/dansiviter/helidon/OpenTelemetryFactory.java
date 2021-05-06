@@ -20,6 +20,15 @@ public class OpenTelemetryFactory implements TracerFactory {
 	private static final Logger LOG = Logger.getLogger(OpenTelemetryFactory.class.getName());
 
 	static {
+		initialise();
+	}
+
+	@Override
+	public Tracer getTracer() {
+		return OpenTracingShim.createTracerShim();
+	}
+
+	private static void initialise() {
 		try {
 			var tracerProvider = SdkTracerProvider.builder()
 				.addSpanProcessor(BatchSpanProcessor.builder(Exporter.builder().build()).build())
@@ -32,10 +41,5 @@ public class OpenTelemetryFactory implements TracerFactory {
 		} catch (NoSuchElementException e) {
 			LOG.log(Level.WARNING, "Unable to initialise trace exporter! {0}", e.getMessage());
 		}
-	}
-
-	@Override
-	public Tracer getTracer() {
-		return OpenTracingShim.createTracerShim();
 	}
 }
