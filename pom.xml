@@ -28,6 +28,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.google.cloud</groupId>
+				<artifactId>libraries-bom</artifactId>
+				<version>20.4.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
 			<!-- Effectively exclude these dependencies -->
 			<dependency>
@@ -101,18 +108,18 @@
 			<artifactId>helidon-microprofile-rest-client</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.glassfish.jersey.media</groupId>
-				<artifactId>jersey-media-json-binding</artifactId>
-				<scope>runtime</scope>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-binding</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-				<groupId>jakarta.json.bind</groupId>
-				<artifactId>jakarta.json.bind-api</artifactId>
+			<groupId>jakarta.json.bind</groupId>
+			<artifactId>jakarta.json.bind-api</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.eclipse</groupId>
-				<artifactId>yasson</artifactId>
-				<scope>runtime</scope>
+			<groupId>org.eclipse</groupId>
+			<artifactId>yasson</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss</groupId>
@@ -138,17 +145,12 @@
 			<version>1.2.0-alpha</version>
 		</dependency>
 		<dependency>
-			<groupId>uk.dansiviter.gcp</groupId>
-			<artifactId>opentelemetry</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-		<!-- <dependency>
 			<groupId>com.google.cloud.opentelemetry</groupId>
 			<artifactId>exporter-trace</artifactId>
 			<version>0.15.0</version>
-		</dependency> -->
-	
+		</dependency>
 
+	
 		<!-- Test Dependencies -->
 
 		<dependency>

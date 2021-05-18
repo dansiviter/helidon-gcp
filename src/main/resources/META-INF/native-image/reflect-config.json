@@ -8,5 +8,9 @@
 		"name": "uk.dansiviter.helidon.model.Post",
     "allDeclaredConstructors": true,
     "allPublicMethods": true
+	},
+	{
+		"name": "javax.enterprise.event.ObserverException",
+		"allDeclaredConstructors": true
 	}
 ]
