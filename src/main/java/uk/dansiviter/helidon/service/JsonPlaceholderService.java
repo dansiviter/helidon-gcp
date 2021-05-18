@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
-import javax.annotation.Nonnull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,5 +23,5 @@ public interface JsonPlaceholderService {
 
 	@GET
 	@Path("posts/{id}")
-	CompletionStage<Optional<Post>> post(@PathParam("id") @Nonnull Integer id);
+	CompletionStage<Optional<Post>> post(@PathParam("id") int id);
 }

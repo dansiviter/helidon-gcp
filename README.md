@@ -40,16 +40,17 @@ docker run --rm -it `
 ```
 
 
-## Build Graal Locally ##
+## Build via Graal Locally ##
 
 ```powershell
-docker run -v $pwd/:/helidon:rw -v $HOME/.m2/repository/:/root/.m2/repository/:rw --entrypoint bash -it --rm helidon/jdk11-graalvm-maven:21.0.0
+docker run -v $pwd/:/helidon:rw `
+  -v $HOME/.m2/repository/:/root/.m2/repository/:rw `
+  --entrypoint bash `
+  -it `
+  --rm helidon/jdk11-graalvm-maven:21.1.0
 ```
 
 
 ## Limitations ##
 
-* [oracle/graal#3218](https://github.com/oracle/graal/issues/3218) `Handler#close()` not called, so tail log entries not persisted. Only Native image, but no workaround currently available.
-* [oracle/helidon#2892](https://github.com/oracle/helidon/issues/2892) Unable to inject `MetricRegistry`: Workaround included in `reflect-config.json`,
-* [oracle/helidon#2913](https://github.com/oracle/helidon/issues/2913) Issues using primitives in JAX-RS server and ReST Client: Workaround is don't use primitives.
-* [oravle/helidon#2910](https://github.com/oracle/helidon/issues/2910) `CompletionStage` causes NPE: Workaround is don't use `CompletionStage` in JAX-RS server.
+* [oracle/graal#3351](https://github.com/oracle/graal/issues/3351) Just SegFaults every time. On disabling Tracing, the issue appears to stop.

@@ -1,8 +1,10 @@
 package uk.dansiviter.helidon;
 
-import java.util.NoSuchElementException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.google.cloud.opentelemetry.trace.TraceExporter;
 
 import io.opentelemetry.api.baggage.propagation.W3CBaggagePropagator;
 import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
@@ -14,32 +16,25 @@ import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
 import io.opentracing.Tracer;
 import io.opentracing.contrib.tracerresolver.TracerFactory;
-import uk.dansiviter.gcp.opentelemetry.trace.Exporter;
 
 public class OpenTelemetryFactory implements TracerFactory {
 	private static final Logger LOG = Logger.getLogger(OpenTelemetryFactory.class.getName());
 
-	static {
-		initialise();
-	}
-
 	@Override
 	public Tracer getTracer() {
-		return OpenTracingShim.createTracerShim();
-	}
-
-	private static void initialise() {
 		try {
+			var exporter = TraceExporter.createWithDefaultConfiguration();
 			var tracerProvider = SdkTracerProvider.builder()
-				.addSpanProcessor(BatchSpanProcessor.builder(Exporter.builder().build()).build())
-				// .setSampler(Sampler.parentBased(Sampler.alwaysOff())) // let parent decide
-				.build();
+			.addSpanProcessor(BatchSpanProcessor.builder(exporter).build())
+			// .setSampler(Sampler.parentBased(Sampler.alwaysOff())) // let parent decide
+			.build();
 			OpenTelemetrySdk.builder().setTracerProvider(tracerProvider)
 				.setPropagators(ContextPropagators.create(
 						TextMapPropagator.composite(W3CTraceContextPropagator.getInstance(), W3CBaggagePropagator.getInstance())))
 				.buildAndRegisterGlobal();
-		} catch (NoSuchElementException e) {
+		} catch (IOException e) {
 			LOG.log(Level.WARNING, "Unable to initialise trace exporter! {0}", e.getMessage());
 		}
+		return OpenTracingShim.createTracerShim();
 	}
 }
