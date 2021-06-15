@@ -36,18 +36,22 @@ docker run --rm -it `
   -p 8080:8080 `
   -e CLOUDSDK_CONFIG=/gcloud `
   -v $Env:APPDATA/gcloud/:/gcloud:ro `
-  helidon:<tag>
+  helidon-gcp:<tag>
 ```
 
 
 ## Build via Graal Locally ##
 
 ```powershell
-docker run -v $pwd/:/helidon:rw `
+docker run `
+  -v $pwd/:/helidon:rw `
   -v $HOME/.m2/repository/:/root/.m2/repository/:rw `
+  -v $Env:APPDATA/gcloud/:/gcloud:ro `
+  -p 8080:8080 `
   --entrypoint bash `
   -it `
-  --rm helidon/jdk11-graalvm-maven:21.1.0
+  --rm `
+  helidon/jdk11-graalvm-maven:21.1.0
 ```
 
 
