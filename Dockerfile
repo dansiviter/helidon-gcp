@@ -5,16 +5,18 @@ RUN apk add --no-cache bash maven
 
 WORKDIR /helidon
 
+ENV MAVEN_CLI_OPTS="-B -e -ntp"
+
 # Create a first layer to cache the "Maven World" in the local repository.
 # Incremental docker builds will always resume after that, unless you update
 # the pom
 ADD pom.xml .
-RUN mvn package -Dmaven.test.skip -Declipselink.weave.skip
+RUN mvn $MAVEN_CLI_OPTS  package -Dmaven.test.skip -Declipselink.weave.skip
 
 # Do the Maven build!
 # Incremental docker builds will resume here when you change sources
 ADD src src
-RUN mvn package -DskipTests
+RUN mvn $MAVEN_CLI_OPTS  package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
