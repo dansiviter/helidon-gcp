@@ -1,3 +1,5 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dansiviter/helidon-gcp/Build?style=flat-square)](https://github.com/dansiviter/helidon-gcp/actions/workflows/build.yaml) ![Java 16](https://img.shields.io/badge/-Java%2016%2B-informational?style=flat-square)
+
 # Helidon GCP #
 
 This is a demonstrator application using [Helidon](https://helidon.io) that hooks into Google Cloud Operations suite of Logging, Monitoring and Tracing:
