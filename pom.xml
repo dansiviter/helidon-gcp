@@ -10,6 +10,10 @@
 	<artifactId>helidon-gcp</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
+	<properties>
+		<version.plugin.jandex>1.1.0</version.plugin.jandex>
+	</properties>
+
 	<repositories>
 		<repository>
 			<id>snpsht</id>
@@ -153,14 +157,9 @@
 		</dependency>
 		<dependency>
 			<groupId>uk.dansiviter.gcp</groupId>
-			<artifactId>gcp-util-opentelemetry</artifactId>
+			<artifactId>gcp-opentelemetry</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.google.cloud.opentelemetry</groupId>
-			<artifactId>exporter-trace</artifactId>
-			<version>0.15.0</version>
-		</dependency> -->
 
 
 		<!-- Test Dependencies -->
