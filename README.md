@@ -38,7 +38,7 @@ docker run --rm -it `
   -p 8080:8080 `
   -e CLOUDSDK_CONFIG=/gcloud `
   -v $Env:APPDATA/gcloud/:/gcloud:ro `
-  helidon-gcp:<tag>
+  helidon:<tag>
 ```
 
 
