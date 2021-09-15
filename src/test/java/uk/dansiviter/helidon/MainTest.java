@@ -1,86 +1,39 @@
-
 package uk.dansiviter.helidon;
 
-import javax.enterprise.inject.se.SeContainer;
-import javax.enterprise.inject.spi.CDI;
 import javax.json.JsonObject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.helidon.microprofile.server.Server;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import io.helidon.microprofile.tests.junit5.Configuration;
+import io.helidon.microprofile.tests.junit5.HelidonTest;
+
+@HelidonTest
+@Configuration(configSources = "META-INF/microprofile-config-test.properties") // awaiting oracle/helidon#3391
 class MainTest {
+	@Test
+	void testHelloWorld(WebTarget target) {
+		JsonObject jsonObject = target.path("v1/greet").request().get(JsonObject.class);
+		Assertions.assertEquals("Hello World!", jsonObject.getString("message"), "default message");
 
-    private static Server server;
-    private static String serverUrl;
+		jsonObject = target.path("v1/greet/Joe").request().get(JsonObject.class);
+		Assertions.assertEquals("Hello Joe!", jsonObject.getString("message"), "hello Joe message");
 
-    @BeforeAll
-    public static void startTheServer() throws Exception {
-        server = Server.create().start();
-        serverUrl = "http://localhost:" + server.port();
-    }
+		Response r = target.path("v1/greet/greeting").request()
+				.put(Entity.entity("{\"greeting\" : \"Hola\"}", MediaType.APPLICATION_JSON));
+		Assertions.assertEquals(204, r.getStatus(), "PUT status code");
 
-    @Test
-    void testHelloWorld() {
-        Client client = ClientBuilder.newClient();
+		jsonObject = target.path("v1/greet/Jose").request().get(JsonObject.class);
+		Assertions.assertEquals("Hola Jose!", jsonObject.getString("message"), "hola Jose message");
 
-        JsonObject jsonObject = client
-                .target(serverUrl)
-                .path("v1/greet")
-                .request()
-                .get(JsonObject.class);
-        Assertions.assertEquals("Hello World!", jsonObject.getString("message"),
-                "default message");
+		r = target.path("metrics").request().get();
+		Assertions.assertEquals(200, r.getStatus(), "GET metrics status code");
 
-        jsonObject = client
-                .target(serverUrl)
-                .path("v1/greet/Joe")
-                .request()
-                .get(JsonObject.class);
-        Assertions.assertEquals("Hello Joe!", jsonObject.getString("message"),
-                "hello Joe message");
-
-        Response r = client
-                .target(serverUrl)
-                .path("v1/greet/greeting")
-                .request()
-                .put(Entity.entity("{\"greeting\" : \"Hola\"}", MediaType.APPLICATION_JSON));
-        Assertions.assertEquals(204, r.getStatus(), "PUT status code");
-
-        jsonObject = client
-                .target(serverUrl)
-                .path("v1/greet/Jose")
-                .request()
-                .get(JsonObject.class);
-        Assertions.assertEquals("Hola Jose!", jsonObject.getString("message"),
-                "hola Jose message");
-
-        r = client
-                .target(serverUrl)
-                .path("metrics")
-                .request()
-                .get();
-        Assertions.assertEquals(200, r.getStatus(), "GET metrics status code");
-
-        r = client
-                .target(serverUrl)
-                .path("health")
-                .request()
-                .get();
-        Assertions.assertEquals(200, r.getStatus(), "GET health status code");
-    }
-
-    @AfterAll
-    static void destroyClass() {
-        CDI<Object> current = CDI.current();
-        ((SeContainer) current).close();
-    }
+		r = target.path("health").request().get();
+		Assertions.assertEquals(200, r.getStatus(), "GET health status code");
+	}
 }

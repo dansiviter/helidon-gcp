@@ -4,14 +4,14 @@
 	<parent>
 		<groupId>io.helidon.applications</groupId>
 		<artifactId>helidon-mp</artifactId>
-		<version>2.3.2</version>
+		<version>2.3.3</version>
 	</parent>
 	<groupId>uk.dansiviter.helidon</groupId>
 	<artifactId>helidon-gcp</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<version.plugin.jandex>1.1.0</version.plugin.jandex>
+		<version.plugin.jandex>1.2.0</version.plugin.jandex>
 	</properties>
 
 	<repositories>
@@ -135,6 +135,7 @@
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jandex</artifactId>
+			<version>2.4.0.Final</version>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
@@ -167,6 +168,11 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.helidon.microprofile.tests</groupId>
+			<artifactId>helidon-microprofile-tests-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
