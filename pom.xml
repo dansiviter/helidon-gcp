@@ -11,6 +11,7 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
+		<version.lib.jandex>2.4.0.Final</version.lib.jandex>
 		<version.plugin.jandex>1.2.0</version.plugin.jandex>
 	</properties>
 
@@ -135,7 +136,6 @@
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jandex</artifactId>
-			<version>2.4.0.Final</version>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
