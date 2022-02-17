@@ -1,6 +1,5 @@
-
 # 1st stage, build the app
-FROM adoptopenjdk/openjdk16:alpine as build
+FROM eclipse-temurin:17-jdk-alpine as build
 RUN apk add --no-cache bash maven
 
 WORKDIR /helidon
@@ -20,7 +19,7 @@ RUN mvn $MAVEN_CLI_OPTS  package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
-FROM adoptopenjdk/openjdk16:alpine-jre
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
