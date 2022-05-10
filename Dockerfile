@@ -19,7 +19,7 @@ RUN mvn $MAVEN_CLI_OPTS  package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
-FROM eclipse-temurin:17-jre-alpine
+FROM alpine:3.15-jre17-apko
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage

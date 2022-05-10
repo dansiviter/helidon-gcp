@@ -14,5 +14,8 @@ accounts:
     uid: 10000
   run-as: nonroot
 
+environment:
+  PATH: /usr/lib/jvm/java-17-openjdk/bin/
+
 os-release:
   version-id: '3.15'
