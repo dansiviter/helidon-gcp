@@ -38,7 +38,8 @@ docker run --rm -it `
   -p 8080:8080 `
   -e CLOUDSDK_CONFIG=/gcloud `
   -v $Env:APPDATA/gcloud/:/gcloud:ro `
-  helidon:<tag>
+  -v $pwd/error/:/error:rw `
+  helidon-gcp:<tag>
 ```
 
 
@@ -56,6 +57,14 @@ docker run `
   helidon/jdk11-graalvm-maven:21.1.0
 ```
 
+## APKO ##
+
+Create minimal Alpine images.
+
+```
+docker run --rm -v $pwd/:/app:rw -w /app ghcr.io/chainguard-dev/apko:v0.3.3 build base.apko.yaml alpine:3.15-apko base.apko.tar
+docker load -i .\base.apko.tar
+```
 
 ## Limitations ##
 

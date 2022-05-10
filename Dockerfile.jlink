@@ -1,7 +1,7 @@
 # 1st stage, build the app
 FROM eclipse-temurin:17-jdk-alpine as build
-RUN apk add --no-cache bash maven
-
+RUN apk add --no-cache --update \
+  bash maven
 WORKDIR /helidon
 
 ENV MAVEN_CLI_OPTS="-B -e -ntp"
@@ -19,12 +19,9 @@ RUN mvn $MAVEN_CLI_OPTS package -Pjlink-image -Dmaven.test.skip
 
 # 2nd stage, build the final image with the JRI built in the 1st stage
 
-FROM alpine:3.15
-
-RUN addgroup -S helidon && adduser -S helidon -G helidon
+FROM alpine:3.15-apko
 
 WORKDIR /helidon
-USER helidon
 COPY --from=build /helidon/target/helidon-gcp-jri ./
-ENTRYPOINT ["bin/java", "-XX:SharedArchiveFile=lib/start.jsa", "-Xshare:auto", "-jar", "app/helidon-gcp.jar"]
+ENTRYPOINT [ "bin/java", "-XX:SharedArchiveFile=lib/start.jsa", "-XX:ErrorFile=/error/hs_err_pid%p.log", "-Xshare:auto", "-Dio.netty.transport.noNative=true", "-Dio.grpc.netty.shaded.io.netty.transport.noNative=true", "-jar", "app/helidon-gcp.jar"]
 EXPOSE 8080

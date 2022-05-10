@@ -4,18 +4,24 @@
 	<parent>
 		<groupId>io.helidon.applications</groupId>
 		<artifactId>helidon-mp</artifactId>
-		<version>2.4.2</version>
+		<version>3.0.0-M1</version>
 	</parent>
 	<groupId>uk.dansiviter.helidon</groupId>
 	<artifactId>helidon-gcp</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
+		<java.version>17</java.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<!-- <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.compiler.verbose>true</maven.compiler.verbose> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<version.lib.jandex>2.4.2.Final</version.lib.jandex>
-		<version.plugin.jandex>1.2.2</version.plugin.jandex>
+		<version.juli>[0.0,1.0)</version.juli>
+		<version.lib.grpc>1.46.0</version.lib.grpc>
 	</properties>
 
 	<repositories>
@@ -39,14 +45,9 @@
 			<dependency>
 				<groupId>com.google.cloud</groupId>
 				<artifactId>libraries-bom</artifactId>
-				<version>23.0.0</version>
+				<version>25.2.0</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.google.cloud</groupId>
-				<artifactId>google-cloud-logging</artifactId>
-				<version>3.1.2</version> <!-- Not in BOM yet -->
 			</dependency>
 			<dependency>
 				<groupId>io.opentelemetry</groupId>
@@ -57,7 +58,7 @@
 			</dependency>
 
 			<!-- Effectively exclude these dependencies -->
-			<dependency>
+			<dependency>  <!-- grpc/grpc-java#3522 -->
 				<groupId>io.grpc</groupId>
 				<artifactId>grpc-api</artifactId>
 				<scope>provided</scope>
@@ -72,6 +73,31 @@
 				<artifactId>grpc-context</artifactId>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>  <!-- see grpc/grpc-java#9083 -->
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-netty-shaded</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-xds</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcpkix-jdk15on</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.conscrypt</groupId>
+				<artifactId>conscrypt-openjdk-uber</artifactId>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -79,12 +105,12 @@
 		<dependency>
 			<groupId>uk.dansiviter.juli</groupId>
 			<artifactId>juli-cdi</artifactId>
-			<version>0.4.0</version>
+			<version>${version.juli}</version>
 		</dependency>
 		<dependency>
 			<groupId>uk.dansiviter.juli</groupId>
 			<artifactId>juli-processor</artifactId>
-			<version>0.4.0</version>
+			<version>${version.juli}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -99,7 +125,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
-			<artifactId>grpc-netty-shaded</artifactId>
+			<artifactId>grpc-netty</artifactId>
 			<version>${version.lib.grpc}</version>
 		</dependency>
 
@@ -220,12 +246,12 @@
 				<dependency>
 					<groupId>org.graalvm.nativeimage</groupId>
 					<artifactId>svm</artifactId>
-					<version>21.1.0</version>
+					<version>22.0.0.2</version>
 				</dependency>
 				<dependency>
 					<groupId>com.google.cloud</groupId>
 					<artifactId>google-cloud-graalvm-support</artifactId>
-					<version>0.6.0</version>
+					<version>0.7.0</version>
 				</dependency>
 			</dependencies>
 			<build>

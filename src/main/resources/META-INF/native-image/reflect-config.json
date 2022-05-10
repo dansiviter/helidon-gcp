@@ -10,7 +10,7 @@
     "allPublicMethods": true
 	},
 	{
-		"name": "javax.enterprise.event.ObserverException",
+		"name": "jakarta.enterprise.event.ObserverException",
 		"allDeclaredConstructors": true
 	}
 ]
