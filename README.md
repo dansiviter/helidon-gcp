@@ -19,11 +19,11 @@ This has 3 types of images:
 
 They all have their benefits but also pain-points.
 
-| Image             | Size  | Start   | Stop |
-|-------------------|-------|---------|------|
-| `helidon:vanilla` | 202MB | 4,414ms | 62ms |
-| `helidon:jlink`   | 163MB | 2,932ms | 18ms |
-| `helidon:native`  | 131MB | 204ms   | 4ms  |
+| Image                 | Size      | Start     | Stop    | Notes            |
+|-----------------------|-----------|-----------|---------|------------------|
+| `helidon:vanilla`     | 236MB     | 3,767ms   | 62ms    | APKO jre17 image |
+| `helidon:jlink`       | 147MB     | 2,620ms   | 18ms    | APKO base image  |
+| ~~`helidon:native`~~  | ~~131MB~~ | ~~204ms~~ | ~~4ms~~ | Build failing    |
 
 > :warning: Native image does have some issues around flushing final logs (see Limitations) so `STOP` is artificially fast.
 
@@ -54,7 +54,7 @@ docker run `
   --entrypoint bash `
   -it `
   --rm `
-  helidon/jdk11-graalvm-maven:21.1.0
+  helidon/jdk17-graalvm-maven:21.3.0
 ```
 
 ## APKO ##
