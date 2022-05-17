@@ -27,3 +27,26 @@ jobs:
         mvn -B -ntp verify
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+
+    - name: Build Vanilla
+      uses: docker/build-push-action@v3
+      with:
+        push: false
+        tags: helidon-gcp:jlink-apko
+
+    - name: Build Vanilla Image
+      uses: docker/build-push-action@v3
+      with:
+        tags: helidon-gcp:vanilla
+
+    - name: Build JLink Image
+      uses: docker/build-push-action@v3
+      with:
+        file: Dockerfile.jlink
+        tags: helidon-gcp:jlink
+
+    - name: Build Native Image
+      uses: docker/build-push-action@v3
+      with:
+        file: Dockerfile.native
+        tags: helidon-gcp:native
