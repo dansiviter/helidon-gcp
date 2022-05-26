@@ -19,7 +19,7 @@ RUN mvn $MAVEN_CLI_OPTS package -Pjlink-image -Dmaven.test.skip
 
 # 2nd stage, build the final image with the JRI built in the 1st stage
 
-FROM ghcr.io/dansiviter/alpine:3-jlink-distroless
+FROM ghcr.io/dansiviter/alpine:3-jlink
 
 WORKDIR /helidon
 COPY --from=build /helidon/target/helidon-gcp-jri ./

@@ -19,7 +19,7 @@ RUN mvn $MAVEN_CLI_OPTS  package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
-FROM ghcr.io/dansiviter/alpine:3-jre17-distroless
+FROM ghcr.io/dansiviter/alpine:3-jre17
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage

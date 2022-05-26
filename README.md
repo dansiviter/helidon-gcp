@@ -22,7 +22,7 @@ They all have their benefits but also pain-points.
 | Image                 | Size      | Start     | Stop    | Notes            |
 |-----------------------|-----------|-----------|---------|------------------|
 | `helidon:vanilla`     | 236MB     | 3,735ms   | 22ms    | APKO jre17 image |
-| `helidon:jlink`       | 148MB     | 1,970ms   | 18ms    | APKO JLink image |
+| `helidon:jlink`       | 148MB     | 2,470ms   | 18ms    | APKO JLink image |
 | ~~`helidon:native`~~  | ~~131MB~~ | ~~204ms~~ | ~~4ms~~ | Build failing    |
 
 > :warning: Native image does have some issues around flushing final logs (see Limitations) so `STOP` is artificially fast.
