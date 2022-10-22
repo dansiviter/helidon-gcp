@@ -1,7 +1,7 @@
 package uk.dansiviter.helidon;
 
-import uk.dansiviter.juli.annotations.Log;
-import uk.dansiviter.juli.annotations.Message;
+import uk.dansiviter.jule.annotations.Log;
+import uk.dansiviter.jule.annotations.Message;
 
 @Log
 public interface Logger {

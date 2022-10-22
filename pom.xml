@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>io.helidon.applications</groupId>
 		<artifactId>helidon-mp</artifactId>
-		<version>3.0.0-M2</version>
+		<version>3.0.2</version>
 	</parent>
 	<groupId>uk.dansiviter.helidon</groupId>
 	<artifactId>helidon-gcp</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<properties>
 		<java.version>17</java.version>
@@ -19,8 +19,9 @@
 		<maven.compiler.verbose>true</maven.compiler.verbose> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<surefire.useModulePath>false</surefire.useModulePath>
 
-		<version.juli>[0.0,1.0)</version.juli>
+		<version.jule>0.7.0-SNAPSHOT</version.jule>
 		<!-- <version.lib.grpc>1.46.0</version.lib.grpc> -->
 	</properties>
 
@@ -45,14 +46,14 @@
 			<dependency>
 				<groupId>com.google.cloud</groupId>
 				<artifactId>libraries-bom</artifactId>
-				<version>25.2.0</version>
+				<version>26.1.3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.opentelemetry</groupId>
 				<artifactId>opentelemetry-bom</artifactId>
-				<version>1.14.0</version>
+				<version>1.19.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -103,21 +104,21 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>uk.dansiviter.juli</groupId>
-			<artifactId>juli-cdi</artifactId>
-			<version>${version.juli}</version>
+			<groupId>uk.dansiviter.jule</groupId>
+			<artifactId>jule-cdi</artifactId>
+			<version>${version.jule}</version>
 		</dependency>
 		<dependency>
-			<groupId>uk.dansiviter.juli</groupId>
-			<artifactId>juli-processor</artifactId>
-			<version>${version.juli}</version>
+			<groupId>uk.dansiviter.jule</groupId>
+			<artifactId>jule-processor</artifactId>
+			<version>${version.jule}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>uk.dansiviter.gcp</groupId>
 			<artifactId>gcp-log</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.helidon.grpc</groupId>
@@ -182,18 +183,18 @@
 		<dependency>
 			<groupId>uk.dansiviter.gcp</groupId>
 			<artifactId>gcp-microprofile-metrics</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-opentracing-shim</artifactId>
-			<version>1.5.0-alpha</version>
+			<version>1.19.0-alpha</version>
 		</dependency>
 		<dependency>
 			<groupId>uk.dansiviter.gcp</groupId>
 			<artifactId>gcp-opentelemetry</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 
 
@@ -243,16 +244,6 @@
 		<profile>
 			<id>native-image</id>
 			<dependencies>
-				<!-- <dependency>
-					<groupId>org.graalvm.nativeimage</groupId>
-					<artifactId>svm</artifactId>
-					<version>22.0.0.2</version>
-				</dependency> -->
-				<dependency>
-					<groupId>com.google.cloud</groupId>
-					<artifactId>google-cloud-graalvm-support</artifactId>
-					<version>0.7.0</version>
-				</dependency>
 				<dependency>
 						<groupId>io.helidon.integrations.graal</groupId>
 						<artifactId>helidon-mp-graal-native-image-extension</artifactId>

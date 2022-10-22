@@ -1,8 +1,11 @@
 package uk.dansiviter.helidon;
 
+import java.util.List;
+
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -11,9 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import io.helidon.microprofile.tests.junit5.Configuration;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
+import uk.dansiviter.helidon.model.Post;
 
 @HelidonTest
-@Configuration(configSources = "META-INF/microprofile-config-test.properties") // awaiting oracle/helidon#3391
+@Configuration(profile = "test")
 class MainTest {
 	@Test
 	void testHelloWorld(WebTarget target) {
