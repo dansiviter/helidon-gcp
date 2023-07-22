@@ -1,6 +1,7 @@
 package uk.dansiviter.helidon;
 
 import static java.lang.String.format;
+import static org.eclipse.microprofile.openapi.OASFactory.createInfo;
 
 import org.eclipse.microprofile.openapi.OASFilter;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
@@ -10,7 +11,11 @@ public class VersionOasFilter implements OASFilter {
 
 	@Override
 	public void filterOpenAPI(OpenAPI openApi) {
-		openApi.getInfo().version(majorMinor());
+		var info = openApi.getInfo();
+		if (info == null) {
+			info = openApi.info(createInfo()).getInfo();
+		}
+		info.version(majorMinor());
 	}
 
 	private String majorMinor() {

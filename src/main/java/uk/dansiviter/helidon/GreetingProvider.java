@@ -35,8 +35,8 @@ public class GreetingProvider {
 	}
 
 	@Traced
-	public void setMessage(String message) {
-		this.log.settingMessage();
-		this.message.set(message);
+	public void setMessage(String msg) {
+		this.log.settingMessage(msg);
+		this.message.set(msg);
 	}
 }
